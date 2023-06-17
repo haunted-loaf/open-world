@@ -32,11 +32,10 @@ var level_scale:
 func _ready():
   dirty = true
 
-func make_mesh(type: ClipmapMeshFactory.Type):
-  var instance = ClipmapMeshInstance.make(factory, type)
+func make_mesh(type: ClipmapMeshFactory.Type, scale: float):
+  var instance = ClipmapMeshInstance.make(factory, type, scale)
   instance.name = str(type)
   add_child(instance, false, INTERNAL_MODE_BACK)
-  # instance.set_owner(get_tree().get_edited_scene_root())
   return instance
 
 func _process(_delta):
@@ -45,16 +44,12 @@ func _process(_delta):
     for node in get_children(true):
       node.queue_free()
     if level == 1:
-      c = make_mesh(ClipmapMeshFactory.Type.CENTRE)
+      c = make_mesh(ClipmapMeshFactory.Type.CENTRE, level_scale)
     else:
-      c = make_mesh(ClipmapMeshFactory.Type.RING)
-    o = make_mesh(ClipmapMeshFactory.Type.O)
-    u = make_mesh(ClipmapMeshFactory.Type.U)
-    l = make_mesh(ClipmapMeshFactory.Type.L)
-    c.scale = Vector3(level_scale, 1, level_scale)
-    o.scale = Vector3(level_scale, 1, level_scale)
-    u.scale = Vector3(level_scale, 1, level_scale)
-    l.scale = Vector3(level_scale, 1, level_scale)
+      c = make_mesh(ClipmapMeshFactory.Type.RING, level_scale)
+    o = make_mesh(ClipmapMeshFactory.Type.O, level_scale)
+    u = make_mesh(ClipmapMeshFactory.Type.U, level_scale)
+    l = make_mesh(ClipmapMeshFactory.Type.L, level_scale)
   
   o.visible = false
   l.visible = false

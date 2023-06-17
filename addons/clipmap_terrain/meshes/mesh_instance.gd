@@ -17,12 +17,20 @@ extends MeshInstance3D
     factory.changed.connect(_on_factory_changed)
     dirty = true
 
+@export var mesh_scale: float:
+  set(value):
+    if mesh_scale != value:
+      mesh_scale = value
+      dirty = true
+
 @export var dirty = false
 
-static func make(factory: ClipmapMeshFactory, type: ClipmapMeshFactory.Type):
+static func make(factory: ClipmapMeshFactory, type: ClipmapMeshFactory.Type, scale: float):
   var instance = ClipmapMeshInstance.new()
   instance.factory = factory
   instance.type = type
+  instance.mesh_scale = scale
+  # instance.scale = Vector3(scale, 1, scale)
   return instance
 
 func _process(_delta):
@@ -35,7 +43,7 @@ func _process(_delta):
 func update():
   if not factory:
     return
-  mesh = factory.get_mesh(type)
+  mesh = factory.get_mesh(type, mesh_scale)
   extra_cull_margin = 16384
   material_override = factory.material
 

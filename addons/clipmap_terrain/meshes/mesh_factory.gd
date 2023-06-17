@@ -53,12 +53,14 @@ func update():
   meshes = {}
   changed.emit()
 
-func get_mesh(type: Type, force = false):
-  # return generate(type)
-  if force or not meshes.has(type):
-    meshes[type] = generate(type)
-  return meshes[type]
+func get_mesh(type: Type, scale: float):
+  return generate(type, scale)
+  if not meshes.has(type):
+    meshes[type] = {}
+  if not meshes[type].has(scale):
+    meshes[type][scale] = generate(type, scale)
+  return meshes[type][scale]
 
-func generate(type: Type):
-  var builder = ClipmapMeshBuilder.new(resolution)
-  return builder.build(type)
+func generate(type: Type, scale: float):
+  var builder = ClipmapMeshBuilder.new(resolution, type, scale)
+  return builder.build()
