@@ -117,6 +117,8 @@ func quad(x: float, z: float):
 func vert(v: Vector3):
   v.x *= scale
   v.z *= scale
+  v.y -= 8192 / PI / 2
   st.set_uv(Vector2(v.x, v.z))
-  st.set_normal(Vector3.UP)
+  v = Vector3(0, v.y, v.z).rotated(Vector3.BACK, v.x / 8192 * PI * 2)
+  st.set_normal(v.normalized() * -Vector3(1, 1, 0))
   st.add_vertex(v)
