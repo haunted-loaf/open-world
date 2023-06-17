@@ -54,7 +54,6 @@ func update():
   changed.emit()
 
 func get_mesh(type: Type, scale: float):
-  return generate(type, scale)
   if not meshes.has(type):
     meshes[type] = {}
   if not meshes[type].has(scale):
