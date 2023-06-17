@@ -19,9 +19,8 @@ void vertex() {
   VERTEX.z = round(VERTEX.z * 10.0) / 10.0;
   UV = 2.0 * VERTEX.xz / world_scale;
   UV2 = UV * 500.0;
-  VERTEX.y += height(UV);
+  VERTEX += NORMAL * height(UV);
   mat3 m = inverse(MODELVIEW_NORMAL_MATRIX);
-  NORMAL = vec3(0, 1, 0);
   TANGENT = m * vec3(0, 0, -1);
   BINORMAL = m * vec3(1, 0, 0);
   worldPos = VERTEX.xyz;
