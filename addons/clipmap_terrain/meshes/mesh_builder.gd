@@ -117,6 +117,4 @@ func quad(x: float, z: float):
 func vert(v: Vector3):
   v.x *= scale
   v.z *= scale
-  st.set_uv(Vector2(v.x, v.z))
-  st.set_normal(Vector3.UP)
   st.add_vertex(v)
