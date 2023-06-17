@@ -57,7 +57,7 @@ float smax(float a, float b)
   return log(exp(k * a) + exp(k * b)) / k;
 }
 
-float height(vec2 uv) {
+float _height(vec2 uv) {
   // float h = S(10.0 * (fbm(noise_map, uv.xy * 0.1, 3, 1.0) * -2.0 + 1.0));
   float h = fbm(uv * 10.0, 10, 0.5, 0.0) * -2.0 + 1.0;
   // h = S(5.0 * h);
@@ -73,9 +73,9 @@ float height(vec2 uv) {
   // h = mix(0.0, h, clamp(sdCircle(uv, 1000.0), 0.0, 1.0));
 
   h -= 3.0;
-  h += 100.0;
-  h *= mix(0.1, 1.0, smoothstep(0.0, 256.0, -sdCircle(uv * 500.0, 500.0)));
-  h -= 100.0;
+  // h += 100.0;
+  // h *= mix(0.1, 1.0, smoothstep(0.0, 256.0, -sdCircle(uv * 500.0, 500.0)));
+  // h -= 100.0;
 
   // h = mix(h, pow(h, 2.0) / height_scale, smoothstep(0.0, 32.0, h));
 
@@ -93,4 +93,10 @@ float height(vec2 uv) {
   // h += h1 * height_scale * 4.0;
   // h += h2 * 32.0;
   // return h;
+}
+
+float height(vec2 uv) {
+  // return _height(uv);
+  return mix(_height(uv), _height(vec2(-uv.x, uv.y)), smoothstep(0.9, 1.0, uv.x));
+  // return mix(_height(uv), _height(-uv), uv.x);
 }
