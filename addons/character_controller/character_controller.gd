@@ -16,7 +16,7 @@ func _physics_process(delta):
   double_tap_timer = max(0.0, double_tap_timer - delta)
   var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
   var up_down = Input.get_axis("move_down", "move_up")
-  var direction = (transform.basis * Vector3(input_dir.x, up_down, input_dir.y)).normalized() * SPEED
+  var direction = ($"Camera Base/Yaw".global_transform.basis * Vector3(input_dir.x, up_down, input_dir.y)).normalized() * SPEED
   if flying:
     position.y += sin(Time.get_ticks_msec() / 1000.0) / 1000.0
     if Input.is_action_just_pressed("move_down") or Input.is_action_just_pressed("move_up"):

@@ -145,7 +145,7 @@ shape = SubResource("CapsuleShape3D_48cww")
 
 [node name="MouseLook" type="Node" parent="CharacterController" node_paths=PackedStringArray("yawNode", "pitchNode", "dollyNode")]
 script = ExtResource("5_jknw1")
-yawNode = NodePath("..")
+yawNode = NodePath("../Camera Base/Yaw")
 pitchNode = NodePath("../Camera Base/Yaw/Pitch")
 dollyNode = NodePath("../Camera Base/Yaw/Pitch/Dolly")
 initialZoom = 1.0
