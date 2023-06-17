@@ -17,12 +17,9 @@ varying vec3 worldPos;
 void vertex() {
   VERTEX.x = round(VERTEX.x * 10.0) / 10.0;
   VERTEX.z = round(VERTEX.z * 10.0) / 10.0;
-  UV = VERTEX.xz;
-  UV = (UV * 2.0) / world_scale;
+  UV = 2.0 * VERTEX.xz / world_scale;
   UV2 = UV * 500.0;
-  float h = height(UV);
-  VERTEX.y += h;
-  // VERTEX.y += max(0.0, h);
+  VERTEX.y += height(UV);
   mat3 m = inverse(MODELVIEW_NORMAL_MATRIX);
   NORMAL = vec3(0, 1, 0);
   TANGENT = m * vec3(0, 0, -1);
