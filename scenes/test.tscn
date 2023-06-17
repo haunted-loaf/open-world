@@ -124,7 +124,6 @@ directional_shadow_blend_splits = true
 directional_shadow_max_distance = 500.0
 
 [node name="Water" type="MeshInstance3D" parent="."]
-visible = false
 material_override = SubResource("StandardMaterial3D_wcsit")
 mesh = SubResource("PlaneMesh_wtr7o")
 
