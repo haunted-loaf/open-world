@@ -15,10 +15,15 @@ map_data = PackedFloat32Array(4.59375, 4.62891, 4.60937, 4.54687, 4.60156, 4.656
 albedo_color = Color(0, 0, 0, 1)
 roughness = 0.01
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_wtr7o"]
-size = Vector2(81920, 81920)
-subdivide_width = 100
-subdivide_depth = 100
+[sub_resource type="CylinderMesh" id="CylinderMesh_tfq8u"]
+flip_faces = true
+top_radius = 1303.8
+bottom_radius = 1303.8
+height = 8192.0
+radial_segments = 256
+rings = 128
+cap_top = false
+cap_bottom = false
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_nx8qo"]
 radius = 0.4
@@ -124,8 +129,9 @@ directional_shadow_blend_splits = true
 directional_shadow_max_distance = 500.0
 
 [node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_wcsit")
-mesh = SubResource("PlaneMesh_wtr7o")
+mesh = SubResource("CylinderMesh_tfq8u")
 
 [node name="CharacterController" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -147.745, 4.72303, 24.8985)
