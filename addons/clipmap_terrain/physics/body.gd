@@ -6,9 +6,10 @@ class_name ClipmapBody
 @export var moved = false
 
 @export var factory: ClipmapMeshFactory
-@export var shape: HeightMapShape3D
 @export var resolution = 7
 @export var collider_scale = 1.0
+
+var shape: HeightMapShape3D
 
 var world_scale: float:
   get:
