@@ -134,11 +134,18 @@ material_override = SubResource("StandardMaterial3D_wcsit")
 mesh = SubResource("CylinderMesh_tfq8u")
 
 [node name="CharacterController" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -147.745, 4.72303, 24.8985)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 503.03, -1199.74, -345.889)
 script = ExtResource("4_k1lvh")
+flying = true
+SPEED = 100.0
+ACCEL = 100.0
+BRAKE = 100.0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="CharacterController"]
 remote_path = NodePath("../../Terrain")
+update_position = false
+update_rotation = false
+update_scale = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
