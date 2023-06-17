@@ -29,7 +29,7 @@ static func make(factory: ClipmapMeshFactory, type: ClipmapMeshFactory.Type, sca
   var instance = ClipmapMeshInstance.new()
   instance.factory = factory
   instance.type = type
-  instance.scale = Vector3(scale, 1, scale)
+  instance.mesh_scale = scale
   return instance
 
 func _process(_delta):
