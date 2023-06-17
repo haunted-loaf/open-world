@@ -17,7 +17,7 @@ varying vec3 worldPos;
 void vertex() {
   VERTEX.x = round(VERTEX.x * 10.0) / 10.0;
   VERTEX.z = round(VERTEX.z * 10.0) / 10.0;
-  UV = 2.0 * VERTEX.xz / world_scale;
+  UV = 2.0 * UV / world_scale;
   UV2 = UV * 500.0;
   VERTEX += NORMAL * height(UV);
   mat3 m = inverse(MODELVIEW_NORMAL_MATRIX);
