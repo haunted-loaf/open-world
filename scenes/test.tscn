@@ -55,7 +55,6 @@ fog_sky_affect = 0.0
 [node name="World" type="Node3D"]
 
 [node name="Terrain" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -147.745, 4.72303, 24.8985)
 
 [node name="Levels" type="Node3D" parent="Terrain"]
 
