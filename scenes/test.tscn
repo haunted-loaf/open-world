@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://b5xkofcks0mra"]
 
 [ext_resource type="Script" path="res://addons/clipmap_terrain/level.gd" id="1_bfbq2"]
-[ext_resource type="Resource" uid="uid://cnnnqct41w65p" path="res://terrain/factory.res" id="2_05ccx"]
+[ext_resource type="Resource" uid="uid://cnnnqct41w65p" path="res://terrain/factory.res" id="2_xabje"]
 [ext_resource type="Script" path="res://addons/clipmap_terrain/physics/body.gd" id="3_yd0ar"]
 [ext_resource type="Script" path="res://addons/character_controller/character_controller.gd" id="4_k1lvh"]
 [ext_resource type="Shader" path="res://water/water.gdshader" id="4_tg1t2"]
@@ -57,75 +57,75 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -275.019, 2.97001, -109.174)
 [node name="Level 1" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 1
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 
 [node name="Level 2" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 2
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 
 [node name="Level 3" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 3
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 
 [node name="Level 4" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 4
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 
 [node name="Level 5" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 5
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 
 [node name="Level 6" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 6
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 
 [node name="Level 7" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 7
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 
 [node name="Level 8" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 8
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 
 [node name="Level 9" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 9
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 
 [node name="Level 10" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 10
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 
 [node name="Level 11" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 11
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 
 [node name="Level 12" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 12
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 
 [node name="ClipmapBody" type="StaticBody3D" parent="Terrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -275, 0, -109)
 top_level = true
 script = ExtResource("3_yd0ar")
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 resolution = 64
 
 [node name="TerrainGrass4" type="Node3D" parent="Terrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -275, 0, -109)
 top_level = true
 script = ExtResource("5_cahix")
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 size = 100
 count = 500
 
@@ -133,7 +133,7 @@ count = 500
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -276, 0, -110)
 top_level = true
 script = ExtResource("5_cahix")
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 size = 200
 snap = 2.0
 count = 500
@@ -142,7 +142,7 @@ count = 500
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -276, 0, -108)
 top_level = true
 script = ExtResource("5_cahix")
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 size = 400
 snap = 4.0
 count = 500
@@ -151,7 +151,7 @@ count = 500
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -272, 0, -112)
 top_level = true
 script = ExtResource("5_cahix")
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 size = 1000
 snap = 8.0
 count = 500
@@ -160,7 +160,7 @@ count = 500
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -272, 0, -112)
 top_level = true
 script = ExtResource("5_cahix")
-factory = ExtResource("2_05ccx")
+factory = ExtResource("2_xabje")
 size = 2000
 snap = 16.0
 count = 500
