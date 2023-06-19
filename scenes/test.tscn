@@ -1,14 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://b5xkofcks0mra"]
+[gd_scene load_steps=17 format=3 uid="uid://b5xkofcks0mra"]
 
 [ext_resource type="Script" path="res://addons/clipmap_terrain/level.gd" id="1_bfbq2"]
-[ext_resource type="Resource" uid="uid://cnnnqct41w65p" path="res://addons/clipmap_terrain/resources/factory.res" id="2_h13e8"]
+[ext_resource type="Resource" uid="uid://cnnnqct41w65p" path="res://terrain/factory.res" id="2_05ccx"]
 [ext_resource type="Script" path="res://addons/clipmap_terrain/physics/body.gd" id="3_yd0ar"]
 [ext_resource type="Script" path="res://addons/character_controller/character_controller.gd" id="4_k1lvh"]
+[ext_resource type="Shader" path="res://water/water.gdshader" id="4_tg1t2"]
+[ext_resource type="Script" path="res://addons/clipmap_terrain/grass/grass.gd" id="5_cahix"]
 [ext_resource type="Script" path="res://addons/character_controller/mouse_look.gd" id="5_jknw1"]
+[ext_resource type="Script" path="res://addons/clipmap_terrain/grass/grass2.gd" id="5_q5rsq"]
+[ext_resource type="PackedScene" uid="uid://cggqb75a8w8r" path="res://addons/debug_menu/debug_menu.tscn" id="9_gssog"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wcsit"]
-albedo_color = Color(0, 0, 0, 1)
-roughness = 0.01
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6wm32"]
+render_priority = 0
+shader = ExtResource("4_tg1t2")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wtr7o"]
 size = Vector2(81920, 81920)
@@ -37,79 +41,132 @@ reflected_light_source = 2
 tonemap_mode = 3
 ssr_enabled = true
 ssao_enabled = true
-glow_enabled = true
+fog_enabled = true
 fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
+fog_density = 0.001
 fog_aerial_perspective = 1.0
 fog_sky_affect = 0.0
 
 [node name="World" type="Node3D"]
 
 [node name="Terrain" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -147.745, 4.72303, 24.8985)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -275.019, 2.97001, -109.174)
 
 [node name="Levels" type="Node3D" parent="Terrain"]
 
 [node name="Level 1" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 1
-factory = ExtResource("2_h13e8")
+factory = ExtResource("2_05ccx")
 
 [node name="Level 2" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 2
-factory = ExtResource("2_h13e8")
+factory = ExtResource("2_05ccx")
 
 [node name="Level 3" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 3
-factory = ExtResource("2_h13e8")
+factory = ExtResource("2_05ccx")
 
 [node name="Level 4" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 4
-factory = ExtResource("2_h13e8")
+factory = ExtResource("2_05ccx")
 
 [node name="Level 5" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 5
-factory = ExtResource("2_h13e8")
+factory = ExtResource("2_05ccx")
 
 [node name="Level 6" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 6
-factory = ExtResource("2_h13e8")
+factory = ExtResource("2_05ccx")
 
 [node name="Level 7" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 7
-factory = ExtResource("2_h13e8")
+factory = ExtResource("2_05ccx")
 
 [node name="Level 8" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 8
-factory = ExtResource("2_h13e8")
+factory = ExtResource("2_05ccx")
 
 [node name="Level 9" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 9
-factory = ExtResource("2_h13e8")
+factory = ExtResource("2_05ccx")
 
 [node name="Level 10" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 10
-factory = ExtResource("2_h13e8")
+factory = ExtResource("2_05ccx")
 
 [node name="Level 11" type="Node3D" parent="Terrain/Levels"]
 script = ExtResource("1_bfbq2")
 level = 11
-factory = ExtResource("2_h13e8")
+factory = ExtResource("2_05ccx")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Terrain"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255005, -4.72303, 0.1015)
+[node name="Level 12" type="Node3D" parent="Terrain/Levels"]
+script = ExtResource("1_bfbq2")
+level = 12
+factory = ExtResource("2_05ccx")
+
+[node name="ClipmapBody" type="StaticBody3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -275, 0, -109)
 top_level = true
 script = ExtResource("3_yd0ar")
-factory = ExtResource("2_h13e8")
-resolution = 15
+factory = ExtResource("2_05ccx")
+resolution = 64
+
+[node name="TerrainGrass4" type="Node3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -275, 0, -109)
+top_level = true
+script = ExtResource("5_cahix")
+factory = ExtResource("2_05ccx")
+size = 100
+count = 500
+
+[node name="TerrainGrass5" type="Node3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -276, 0, -110)
+top_level = true
+script = ExtResource("5_cahix")
+factory = ExtResource("2_05ccx")
+size = 200
+snap = 2.0
+count = 500
+
+[node name="TerrainGrass6" type="Node3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -276, 0, -108)
+top_level = true
+script = ExtResource("5_cahix")
+factory = ExtResource("2_05ccx")
+size = 400
+snap = 4.0
+count = 500
+
+[node name="TerrainGrass7" type="Node3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -272, 0, -112)
+top_level = true
+script = ExtResource("5_cahix")
+factory = ExtResource("2_05ccx")
+size = 1000
+snap = 8.0
+count = 500
+
+[node name="TerrainGrass8" type="Node3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -272, 0, -112)
+top_level = true
+script = ExtResource("5_cahix")
+factory = ExtResource("2_05ccx")
+size = 2000
+snap = 16.0
+count = 500
+
+[node name="ClipmapGrass2" type="Node3D" parent="Terrain"]
+script = ExtResource("5_q5rsq")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.91202, 0.410146, 0, -0.410146, 0.91202, 0, 36.3876, 0)
@@ -118,14 +175,15 @@ directional_shadow_blend_splits = true
 directional_shadow_max_distance = 500.0
 
 [node name="Water" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_wcsit")
+material_override = SubResource("ShaderMaterial_6wm32")
+cast_shadow = 0
 mesh = SubResource("PlaneMesh_wtr7o")
 
 [node name="CharacterController" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -147.745, 4.72303, 24.8985)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -275.019, 2.97001, -109.174)
 script = ExtResource("4_k1lvh")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="CharacterController"]
+[node name="Terrain Remote" type="RemoteTransform3D" parent="CharacterController"]
 remote_path = NodePath("../../Terrain")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterController"]
@@ -165,3 +223,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.40253)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ynpps")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("9_gssog")]
+follow_viewport_enabled = true

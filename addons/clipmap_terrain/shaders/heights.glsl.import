@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://rxe5gk6kql42"
+path="res://.godot/imported/heights.glsl-fca7816cbd3703ccdf3700fcf957835d.res"
+
+[deps]
+
+source_file="res://addons/clipmap_terrain/shaders/heights.glsl"
+dest_files=["res://.godot/imported/heights.glsl-fca7816cbd3703ccdf3700fcf957835d.res"]
+
+[params]
+

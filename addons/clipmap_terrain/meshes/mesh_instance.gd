@@ -34,6 +34,7 @@ static func make(factory: ClipmapMeshFactory, type: ClipmapMeshFactory.Type, sca
 
 func _process(_delta):
   top_level = true
+  set_layer_mask_value(2, false)
   if not dirty:
     return
   dirty = false

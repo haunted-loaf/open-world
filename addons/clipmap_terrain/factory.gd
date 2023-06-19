@@ -12,7 +12,7 @@ enum Type {
 
 var meshes = {}
 
-@export var material: ShaderMaterial:
+@export var material: Material:
   set(value):
     if material != value:
       material = value
@@ -22,6 +22,12 @@ var meshes = {}
   set(value):
     if shape_material != value:
       shape_material = value
+      update()
+
+@export var grass_material: ShaderMaterial:
+  set(value):
+    if grass_material != value:
+      grass_material = value
       update()
 
 @export var world_scale = 1.0:
