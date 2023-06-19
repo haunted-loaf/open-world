@@ -6,7 +6,7 @@ class_name MouseLook
 @export var dollyNode: Node3D
 
 @export var initialZoom : float = 0
-@export var maxZoom : float = 5
+@export var maxZoom : float = 500
 @export var minZoom : float = 0
 @export var zoomStep : float = 2
 @export var verticalSensitivity : float = 0.002
