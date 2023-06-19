@@ -18,10 +18,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 Console="*res://addons/panku_console/console.tscn"
+DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/clipmap_terrain/plugin.cfg", "res://addons/character_controller/plugin.cfg", "res://addons/panku_console/plugin.cfg")
+enabled=PackedStringArray("res://addons/clipmap_terrain/plugin.cfg", "res://addons/character_controller/plugin.cfg", "res://addons/panku_console/plugin.cfg", "res://addons/debug_menu/plugin.cfg")
 
 [input]
 
