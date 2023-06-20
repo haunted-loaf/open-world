@@ -4,6 +4,7 @@ class_name MouseLook
 @export var yawNode: Node3D
 @export var pitchNode: Node3D
 @export var dollyNode: Node3D
+@export var camera: Camera3D
 
 @export var initialZoom : float = 0
 @export var maxZoom : float = 500
@@ -74,3 +75,6 @@ func apply():
   dollyNode.position.x = lean
   pitchNode.rotation.x = _rotation.x
   yawNode.rotation.y = _rotation.y
+  if camera:
+    camera.far = _curZoom * 1e3
+    camera.near = _curZoom / 10.0
