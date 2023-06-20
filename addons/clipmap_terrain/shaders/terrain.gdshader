@@ -31,8 +31,6 @@ uniform sampler2D snow_ao;
 uniform sampler2D snow_roughness;
 
 void vertex() {
-  VERTEX.x = round(VERTEX.x * 10.0) / 10.0;
-  VERTEX.z = round(VERTEX.z * 10.0) / 10.0;
   UV = VERTEX.xz;
   UV2 = UV;
   VERTEX.y = height(UV);
