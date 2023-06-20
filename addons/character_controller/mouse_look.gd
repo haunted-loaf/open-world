@@ -45,10 +45,10 @@ func _process(_delta):
     if abs(lean) > 0:
       lean = 0
     elif _curZoom > minZoom:
-      _curZoom -= zoomStep
+      _curZoom /= zoomStep
   if Input.is_action_just_released("look_zoom_out"):
     if _curZoom < maxZoom:
-      _curZoom += zoomStep
+      _curZoom *= zoomStep
     elif lean == 0:
       lean = 1
     else:
