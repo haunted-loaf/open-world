@@ -1,16 +1,15 @@
 @tool
-extends StaticBody3D
-class_name ClipmapBody
+extends CollisionShape3D
+class_name TerrainShape3D
 
 @export var dirty = false
 @export var moved = false
 
+@export var follow: Node3D
 @export var data: TerrainData
 @export var resolution = 7
 @export var collider_scale = 1.0
 @export var height_offset = 0.0
-
-var shape: HeightMapShape3D
 
 var world_scale: float:
   get:
@@ -20,7 +19,6 @@ var height_scale: float:
   get:
     return data.height_scale
 
-var collider: CollisionShape3D
 var viewport: SubViewport
 var material: ShaderMaterial
 var texture: ViewportTexture
@@ -38,14 +36,15 @@ func _process(_delta):
     # data.shape_material.property_list_changed.connect(func(): dirty = true)
     for node in get_children():
       node.queue_free()
-    collider = null
     viewport = null
     moved = true
-  if not collider:
-    make_collider()
+  if not shape:
+    shape = HeightMapShape3D.new()
   if not viewport:
     make_viewport()
-  var new_position = get_parent().global_position.snapped(Vector3(snap, 0.0, snap)) * Vector3(1.0, 0.0, 1.0)
+  if not follow:
+    return
+  var new_position = follow.global_position.snapped(Vector3(snap, 0.0, snap)) * Vector3(1.0, 0.0, 1.0)
   if new_position != global_position:
     moved = true
   if moved:
@@ -83,10 +82,3 @@ func make_viewport():
   material = data.shape_material.duplicate()
   mesh.material_override = material
   texture = viewport.get_texture()
-
-func make_collider():
-  collider = CollisionShape3D.new()
-  add_child(collider)
-  # collider.set_owner(get_tree().edited_scene_root)
-  shape = HeightMapShape3D.new()
-  collider.shape = shape
