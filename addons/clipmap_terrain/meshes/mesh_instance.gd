@@ -2,19 +2,19 @@
 class_name ClipmapMeshInstance
 extends MeshInstance3D
 
-@export var type: ClipmapMeshFactory.Type:
+@export var type: ClipmapMeshBuilder.Type:
   set(value):
     if type == value:
       return
     type = value
     dirty = true
 
-@export var factory: ClipmapMeshFactory:
+@export var data: TerrainData:
   set(value):
-    if factory == value:
+    if data == value:
       return
-    factory = value
-    factory.changed.connect(_on_factory_changed)
+      data = value
+    data.changed.connect(_on_data_changed)
     dirty = true
 
 @export var mesh_scale: float = 1.0:
@@ -25,11 +25,11 @@ extends MeshInstance3D
 
 @export var dirty = false
 
-static func make(factory: ClipmapMeshFactory, type: ClipmapMeshFactory.Type, scale: float):
+static func make(data: TerrainData, type: ClipmapMeshBuilder.Type, scale: float):
   var instance = ClipmapMeshInstance.new()
-  instance.factory = factory
-  instance.type = type
-  instance.scale = Vector3(scale, 1, scale)
+  data.data = data
+  data.type = type
+  data.scale = Vector3(scale, 1, scale)
   return instance
 
 func _process(_delta):
@@ -41,11 +41,11 @@ func _process(_delta):
   update()
 
 func update():
-  if not factory:
+  if not data:
     return
-  mesh = factory.get_mesh(type, mesh_scale)
+  mesh = data.get_mesh(type, mesh_scale)
   extra_cull_margin = 16384
-  material_override = factory.material
+  material_override = data.material
 
-func _on_factory_changed():
+func _on_data_changed():
   dirty = true

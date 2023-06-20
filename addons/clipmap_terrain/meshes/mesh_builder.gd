@@ -1,9 +1,17 @@
 @tool
 class_name ClipmapMeshBuilder
 
+enum Type {
+  CENTRE,
+  RING,
+  O,
+  L,
+  U,
+}
+
 var resolution: int
 
-var type: ClipmapMeshFactory.Type
+var type: Type
 
 var scale: float
 
@@ -13,7 +21,7 @@ var spacing: float:
   get:
     return 1.0 / resolution
 
-func _init(resolution: int, type: ClipmapMeshFactory.Type, scale: float):
+func _init(resolution: int, type: Type, scale: float):
   self.resolution = resolution
   self.type = type
   self.scale = scale
@@ -22,15 +30,15 @@ func _init(resolution: int, type: ClipmapMeshFactory.Type, scale: float):
 func build():
   st.clear()
   st.begin(Mesh.PRIMITIVE_TRIANGLES)
-  if type == ClipmapMeshFactory.Type.CENTRE:
+  if type == Type.CENTRE:
     generate_centre()
-  elif type == ClipmapMeshFactory.Type.RING:
+  elif type == Type.RING:
     generate_ring()
-  elif type == ClipmapMeshFactory.Type.O:
+  elif type == Type.O:
     generate_o()
-  elif type == ClipmapMeshFactory.Type.U:
+  elif type == Type.U:
     generate_u()
-  elif type == ClipmapMeshFactory.Type.L:
+  elif type == Type.L:
     generate_l()
   else:
     return null

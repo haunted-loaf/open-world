@@ -5,7 +5,7 @@ class_name ClipmapGrass
 @export var dirty = false
 @export var moved = false
 
-@export var factory: ClipmapMeshFactory
+@export var data: TerrainData
 @export var size = 64
 @export var snap: float = 1.0
 @export var count = 100
@@ -21,7 +21,7 @@ func _process(_delta):
   var was_dirty = dirty
   if dirty:
     dirty = false
-    # factory.shape_material.property_list_changed.connect(func(): dirty = true)
+    # data.shape_material.property_list_changed.connect(func(): dirty = true)
     for node in get_children():
       node.queue_free()
     instance = null
@@ -34,8 +34,8 @@ func _process(_delta):
   if moved:
     moved = false
     global_position = new_position
-  mesh.material.set_shader_parameter("world_scale", factory.world_scale)
-  mesh.material.set_shader_parameter("height_scale", factory.height_scale)
+  mesh.material.set_shader_parameter("world_scale", data.world_scale)
+  mesh.material.set_shader_parameter("height_scale", data.height_scale)
   mesh.material.set_shader_parameter("position", get_parent().global_position)
   mesh.material.set_shader_parameter("size", size)
   # mesh.material.set_shader_parameter("position", global_position)
@@ -55,8 +55,8 @@ func make_instance():
   mesh.center_offset = Vector3(0.0, 0.5, 0.0);
   instance.multimesh.mesh = mesh
   multimesh.instance_count = count * count
-  mesh.material = factory.grass_material.duplicate()
-  instance.extra_cull_margin = factory.height_scale
+  mesh.material = data.grass_material.duplicate()
+  instance.extra_cull_margin = data.height_scale
   var i = 0
   for x in count:
     for z in count:

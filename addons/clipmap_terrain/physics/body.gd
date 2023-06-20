@@ -5,7 +5,7 @@ class_name ClipmapBody
 @export var dirty = false
 @export var moved = false
 
-@export var factory: ClipmapMeshFactory
+@export var data: TerrainData
 @export var resolution = 7
 @export var collider_scale = 1.0
 @export var height_offset = 0.0
@@ -14,11 +14,11 @@ var shape: HeightMapShape3D
 
 var world_scale: float:
   get:
-    return factory.world_scale
+    return data.world_scale
 
 var height_scale: float:
   get:
-    return factory.height_scale
+    return data.height_scale
 
 var collider: CollisionShape3D
 var viewport: SubViewport
@@ -35,7 +35,7 @@ func _process(_delta):
   var was_dirty = dirty
   if dirty:
     dirty = false
-    # factory.shape_material.property_list_changed.connect(func(): dirty = true)
+    # data.shape_material.property_list_changed.connect(func(): dirty = true)
     for node in get_children():
       node.queue_free()
     collider = null
@@ -80,7 +80,7 @@ func make_viewport():
   viewport.add_child(camera)
   viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
   viewport.add_child(mesh)
-  material = factory.shape_material.duplicate()
+  material = data.shape_material.duplicate()
   mesh.material_override = material
   texture = viewport.get_texture()
 

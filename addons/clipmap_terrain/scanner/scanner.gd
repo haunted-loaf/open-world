@@ -5,7 +5,7 @@ class_name ClipmapScanner
 @export var dirty = false
 @export var moved = false
 
-@export var factory: ClipmapMeshFactory
+@export var data: TerrainData
 @export var resolution = 7
 @export var snap: float = 1.0
 
@@ -22,7 +22,7 @@ func _process(_delta):
   var was_dirty = dirty
   if dirty:
     dirty = false
-    # factory.shape_material.property_list_changed.connect(func(): dirty = true)
+    # data.shape_material.property_list_changed.connect(func(): dirty = true)
     for node in get_children():
       node.queue_free()
     viewport = null
@@ -34,7 +34,7 @@ func _process(_delta):
     moved = true
   if moved:
     moved = false
-    material.set_shader_parameter("scale", 0.5 * factory.world_scale / resolution)
+    material.set_shader_parameter("scale", 0.5 * data.world_scale / resolution)
     material.set_shader_parameter("position", new_position)
     await get_tree().process_frame
     global_position = new_position
@@ -56,7 +56,7 @@ func make_viewport():
   viewport.add_child(camera)
   viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
   viewport.add_child(mesh)
-  material = factory.shape_material.duplicate()
+  material = data.shape_material.duplicate()
   mesh.material_override = material
   texture = viewport.get_texture()
   rect = TextureRect.new()
