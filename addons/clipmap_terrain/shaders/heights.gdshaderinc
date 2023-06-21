@@ -52,3 +52,14 @@ float height(vec2 uv) {
   h = mix(-100, h, smoothstep(0.0, 512.0, -sdCircle(uv, 4096.0)));
   return h;
 }
+
+vec3 height_normal(vec2 uv) {
+  vec3 ts = vec3(1.0, 1.0, 0.0);
+  float h1 = height(uv + ts.xz);
+  float h2 = height(uv + ts.zy);
+  float x1 = height(uv - ts.xz);
+  float x2 = height(uv + ts.xz);
+  float y1 = height(uv - ts.zy);
+  float y2 = height(uv + ts.zy);
+  return normalize(vec3(x1 - x2, 2.0, y1 - y2));
+}
