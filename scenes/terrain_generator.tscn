@@ -1,21 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://chjrjlkxuee0"]
+[gd_scene load_steps=6 format=3 uid="uid://chjrjlkxuee0"]
 
 [ext_resource type="Script" path="res://addons/clipmap_terrain/terrain_generator.gd" id="1_t3eay"]
-[ext_resource type="RDShaderFile" uid="uid://rxe5gk6kql42" path="res://addons/clipmap_terrain/shaders/heights.glsl" id="2_w2w71"]
+[ext_resource type="Resource" uid="uid://cnnnqct41w65p" path="res://terrain/islands/islands.res" id="2_1jd8x"]
+[ext_resource type="RDShaderFile" uid="uid://7fbbvnwqbx14" path="res://terrain/islands/islands.glsl" id="2_e4ufa"]
 [ext_resource type="RDShaderFile" uid="uid://dw2ix8tcumlba" path="res://terrain/floater/floater.glsl" id="3_oqtri"]
+[ext_resource type="Resource" uid="uid://d5dpsdx8s2ne" path="res://terrain/floater/floater.res" id="4_ni5le"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Islands" type="Node3D" parent="."]
 script = ExtResource("1_t3eay")
-compute_shader = ExtResource("2_w2w71")
+data = ExtResource("2_1jd8x")
+compute_shader = ExtResource("2_e4ufa")
 resolution = 8192
 state = "Finished"
+terrain_name = "islands"
+resource_dir = "res://terrain/islands"
 
 [node name="Floater" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 script = ExtResource("1_t3eay")
+data = ExtResource("4_ni5le")
 compute_shader = ExtResource("3_oqtri")
-world_size = 512.0
 state = "Finished"
 terrain_name = "floater"
+resource_dir = "res://terrain/floater"

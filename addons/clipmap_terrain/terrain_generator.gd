@@ -2,12 +2,12 @@
 class_name TerrainGenerator
 extends Node3D
 
+@export var data: TerrainData
 @export var compute_shader: RDShaderFile
-@export var world_size = 8192.0
-@export var world_height = 256.0
 @export var resolution = 512
 @export var state = "Idle"
 @export var terrain_name = "terrain"
+@export_dir var resource_dir
 
 var thread: Thread
 
@@ -42,9 +42,9 @@ func _generate():
 
   var pba := PackedByteArray()
   pba.resize(4 * 8)
-  pba.encode_float(0, world_size)
-  pba.encode_float(4, world_height)
-  pba.encode_float(8, world_size)
+  pba.encode_float(0, data.world_size)
+  pba.encode_float(4, data.world_height)
+  pba.encode_float(8, data.world_size)
   pba.encode_u32(12, resolution)
 
   var uniform_set := rd.uniform_set_create([uniform1], shader, 0)
@@ -72,7 +72,7 @@ func _generate():
   image.generate_mipmaps()
 
   state = "Saving image"
-  image.save_exr("res://%s.exr" % terrain_name)
+  image.save_exr("%s/%s.exr" % [resource_dir, terrain_name])
 
   state = "Creating texture"
   var texture := ImageTexture.create_from_image(image)
