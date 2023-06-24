@@ -4,13 +4,14 @@
 
 Godot 4.x is required.
 
-You can use a version compiled with double precision, but there is a bug with the water renderer.
+## Notes
 
-The terrain collider currently depends on support for floating-point viewport textures, or else the
-collider will be _very_ inaccurate.
+Because the files are big and I'd run out of LFS quota pretty much immediately, the heightmaps are
+not included. You will get error messages the first time you open the project, complaining that the
+terain .exr files are missing.
 
-I plan to implement a compute-shader-based method for getting data for the collider, so this problem
-will go away in a while, but in the mean time you will enjoy the best results with my custom Godot
-branch I maintain at https://github.com/haunted-loaf/godot/
+You can (or, should be able to) use the `terrain_generator` scene to produce them locally, and then
+close and reopen the project. This only needs to be done once.
 
-Other than that nonsense, things should Just Work™.
+In my experience, Godot can sometimes hang when importing the new images. Killing it and starting
+Godot again fixes this for me.
