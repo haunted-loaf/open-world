@@ -12,11 +12,9 @@ sky = SubResource("Sky_ut8jp")
 ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 3
-ssr_enabled = true
-ssao_enabled = true
 fog_enabled = true
 fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
-fog_density = 0.001
+fog_density = 0.0004
 fog_aerial_perspective = 1.0
 fog_sky_affect = 0.0
 

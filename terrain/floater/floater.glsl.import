@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://dw2ix8tcumlba"
+path="res://.godot/imported/floater.glsl-8b792625795fd8d2fc61a9fa09314943.res"
+
+[deps]
+
+source_file="res://terrain/floater/floater.glsl"
+dest_files=["res://.godot/imported/floater.glsl-8b792625795fd8d2fc61a9fa09314943.res"]
+
+[params]
+

@@ -42,6 +42,8 @@ func build():
     generate_l()
   else:
     return null
+  st.generate_normals()
+  st.generate_tangents()
   return st.commit()
 
 func generate_centre():
@@ -125,4 +127,5 @@ func quad(x: float, z: float):
 func vert(v: Vector3):
   v.x *= scale
   v.z *= scale
+  st.set_uv(Vector2(v.x, v.z))
   st.add_vertex(v)

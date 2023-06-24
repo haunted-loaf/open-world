@@ -1,3 +1,15 @@
+layout(local_size_x = 16, local_size_y = 16) in;
+
+layout(binding = 0, rgba16f) restrict uniform image2D heights;
+
+layout(push_constant) restrict uniform Constants {
+  float world_scale;
+  float height_scale;
+  float local_scale;
+  uint resolution;
+  ivec4 offset;
+} data;
+
 float sdCircle (vec2 p, float r) {
   return length(p) - r;
 }

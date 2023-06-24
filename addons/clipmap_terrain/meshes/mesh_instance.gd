@@ -13,8 +13,11 @@ extends MeshInstance3D
   set(value):
     if data == value:
       return
-      data = value
-    data.changed.connect(_on_data_changed)
+    if data:
+      data.changed.disconnect(_on_data_changed)
+    data = value
+    if data:
+      data.changed.connect(_on_data_changed)
     dirty = true
 
 @export var mesh_scale: float = 1.0:
@@ -25,16 +28,20 @@ extends MeshInstance3D
 
 @export var dirty = false
 
+var material: Material
+
 static func make(data: TerrainData, type: ClipmapMeshBuilder.Type, scale: float):
   var instance = ClipmapMeshInstance.new()
-  data.data = data
-  data.type = type
-  data.scale = Vector3(scale, 1, scale)
+  instance.data = data
+  instance.type = type
+  instance.scale = Vector3(scale, 1, scale)
   return instance
 
 func _process(_delta):
-  top_level = true
   set_layer_mask_value(2, false)
+  set_instance_shader_parameter("extra_rotation_0", get_parent().global_transform.basis[0])
+  set_instance_shader_parameter("extra_rotation_1", get_parent().global_transform.basis[1])
+  set_instance_shader_parameter("extra_rotation_2", get_parent().global_transform.basis[2])
   if not dirty:
     return
   dirty = false
@@ -45,7 +52,11 @@ func update():
     return
   mesh = data.get_mesh(type, mesh_scale)
   extra_cull_margin = 16384
-  material_override = data.material
+  self.ignore_occlusion_culling = true
+  # var aabb := get_aabb()
+  # aabb.size.y = 2 * data.world_height
+  # custom_aabb = aabb
+  material_override = material
 
 func _on_data_changed():
   dirty = true

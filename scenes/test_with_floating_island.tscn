@@ -1,0 +1,169 @@
+[gd_scene load_steps=20 format=3 uid="uid://drhnhy46b6qor"]
+
+[ext_resource type="Shader" path="res://addons/clipmap_terrain/water/water.gdshader" id="1_y1tlk"]
+[ext_resource type="Script" path="res://scripts/water.gd" id="2_3hy4s"]
+[ext_resource type="Script" path="res://addons/clipmap_terrain/level_stack.gd" id="3_77yey"]
+[ext_resource type="Resource" uid="uid://cnnnqct41w65p" path="res://terrain/islands/islands.res" id="4_0oluh"]
+[ext_resource type="Material" uid="uid://1ruuktd8mnha" path="res://terrain/islands/islands.material" id="5_lvyef"]
+[ext_resource type="Script" path="res://addons/clipmap_terrain/physics/shape.gd" id="6_6g62k"]
+[ext_resource type="Resource" uid="uid://d5dpsdx8s2ne" path="res://terrain/floater/floater.res" id="7_u7ng2"]
+[ext_resource type="Material" uid="uid://dupykk7i3h8dv" path="res://terrain/floater/floater_top.material" id="8_la4mq"]
+[ext_resource type="Material" uid="uid://dtcus1gtpuflc" path="res://terrain/floater/floater_bottom.material" id="9_8jtb2"]
+[ext_resource type="Script" path="res://addons/character_controller/character_controller.gd" id="10_dwrd3"]
+[ext_resource type="Script" path="res://addons/character_controller/mouse_look.gd" id="11_76nw4"]
+[ext_resource type="Script" path="res://scripts/performance_label.gd" id="12_iccey"]
+[ext_resource type="PackedScene" uid="uid://dlouqiytdsv0x" path="res://scenes/environment.tscn" id="13_2x6p7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tkm1h"]
+render_priority = 0
+shader = ExtResource("1_y1tlk")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3cdnt"]
+size = Vector2(81920, 81920)
+subdivide_width = 256
+subdivide_depth = 256
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_m7r3o"]
+map_width = 16
+map_depth = 16
+map_data = PackedFloat32Array(30.4375, 30.5625, 30.75, 30.9531, 31.1562, 31.2969, 31.375, 31.4531, 31.5312, 31.4531, 31.3281, 31.4688, 31.7031, 31.7188, 31.6562, 31.8125, 30.5, 30.5, 30.5625, 30.7656, 31.0469, 31.2969, 31.4688, 31.5625, 31.6719, 31.5938, 31.4375, 31.5938, 31.8594, 31.7969, 31.6562, 31.9375, 30.7188, 30.6562, 30.5, 30.6406, 30.9062, 31.25, 31.6094, 31.6719, 31.625, 31.625, 31.5938, 31.7344, 31.9062, 31.8281, 31.7031, 32.125, 30.875, 30.8125, 30.6406, 30.7656, 31, 31.3438, 31.75, 31.7969, 31.7344, 31.75, 31.7969, 31.9219, 32.0312, 32, 31.9375, 32.3438, 30.8906, 30.8906, 30.9844, 31.125, 31.25, 31.4688, 31.7812, 31.8594, 31.9062, 32, 32.1875, 32.25, 32.2188, 32.3125, 32.4688, 32.6562, 31.125, 31.2969, 31.5, 31.625, 31.6094, 31.6406, 31.7812, 31.875, 32, 32.1875, 32.4062, 32.5, 32.5, 32.625, 32.8125, 33.0312, 31.6719, 31.9531, 32.125, 32.2188, 32.125, 31.9688, 31.8281, 31.9062, 32.1562, 32.375, 32.6562, 32.7812, 32.9062, 32.9688, 33, 33.5625, 32.0312, 32.3125, 32.4688, 32.5312, 32.4375, 32.25, 32.0625, 32.125, 32.3438, 32.625, 32.875, 33.0312, 33.1875, 33.25, 33.3125, 33.875, 32.3438, 32.5312, 32.5938, 32.6875, 32.75, 32.5938, 32.4062, 32.4375, 32.5938, 32.8438, 33.0625, 33.25, 33.4375, 33.5625, 33.6875, 34, 32.6562, 32.7812, 32.8125, 32.875, 32.9375, 32.8125, 32.6875, 32.7188, 32.875, 33.1562, 33.4062, 33.625, 33.8438, 34, 34.125, 34.3438, 32.875, 32.9688, 33.0938, 33.125, 33, 32.9062, 32.8438, 32.9062, 33.0625, 33.375, 33.7188, 33.9688, 34.3125, 34.4375, 34.5312, 34.7812, 33.0938, 33.2188, 33.3438, 33.3438, 33.2812, 33.1875, 33.125, 33.1875, 33.375, 33.6875, 33.9688, 34.2188, 34.5312, 34.6875, 34.7812, 35, 33.4062, 33.5312, 33.5625, 33.6562, 33.75, 33.6875, 33.5938, 33.6562, 33.9375, 34.125, 34.2188, 34.4062, 34.6875, 34.9062, 35.0938, 35.1875, 33.7188, 33.8438, 33.875, 33.9688, 34.125, 34.0625, 33.9688, 34.0312, 34.1875, 34.375, 34.5, 34.6875, 34.9688, 35.25, 35.4688, 35.5, 34.0938, 34.1875, 34.1875, 34.2812, 34.4688, 34.4375, 34.3438, 34.3438, 34.2812, 34.5312, 34.9062, 35.0938, 35.2812, 35.5625, 35.8125, 35.9062, 34.3125, 34.5312, 34.8438, 35, 35.0312, 35.0312, 35.0625, 35.0938, 35.25, 35.3438, 35.3438, 35.5312, 35.8125, 36.0938, 36.3125, 36.4375)
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_1simm"]
+map_width = 16
+map_depth = 16
+map_data = PackedFloat32Array(5.75625, 5.79375, 5.84062, 5.89375, 5.94375, 5.98125, 6.00625, 6.02812, 6.05625, 6.04688, 6.02812, 6.0625, 6.11562, 6.12187, 6.11562, 6.15312, 5.78438, 5.79688, 5.81875, 5.86875, 5.93437, 5.99375, 6.04063, 6.06563, 6.09375, 6.0875, 6.0625, 6.10313, 6.15938, 6.15312, 6.13125, 6.19375, 5.84062, 5.84062, 5.82188, 5.85938, 5.92188, 6, 6.08125, 6.10313, 6.10313, 6.10625, 6.10938, 6.14375, 6.18437, 6.175, 6.15312, 6.24687, 5.88438, 5.88438, 5.85938, 5.89687, 5.95312, 6.03438, 6.12187, 6.14062, 6.1375, 6.14687, 6.1625, 6.19375, 6.225, 6.22188, 6.2125, 6.30625, 5.9, 5.9125, 5.94063, 5.98125, 6.01875, 6.07188, 6.14062, 6.16563, 6.18125, 6.2125, 6.25313, 6.275, 6.275, 6.29688, 6.33125, 6.38125, 5.95937, 6.00313, 6.05625, 6.09375, 6.1, 6.11562, 6.15312, 6.17812, 6.2125, 6.25938, 6.3125, 6.3375, 6.34062, 6.36875, 6.4125, 6.4625, 6.07812, 6.14687, 6.19375, 6.22188, 6.21562, 6.19063, 6.175, 6.2, 6.25625, 6.3125, 6.36875, 6.40625, 6.43125, 6.45, 6.4625, 6.58125, 6.16563, 6.23125, 6.27187, 6.29688, 6.29063, 6.25938, 6.23125, 6.25625, 6.30937, 6.36875, 6.425, 6.4625, 6.5, 6.51875, 6.5375, 6.65625, 6.23438, 6.28438, 6.30937, 6.3375, 6.3625, 6.34062, 6.31563, 6.32812, 6.36562, 6.41875, 6.475, 6.51875, 6.5625, 6.59375, 6.625, 6.69375, 6.30625, 6.34375, 6.36562, 6.3875, 6.40625, 6.39687, 6.37813, 6.39375, 6.43125, 6.49375, 6.55, 6.6, 6.65625, 6.6875, 6.71875, 6.775, 6.35625, 6.39062, 6.425, 6.44375, 6.425, 6.41875, 6.41875, 6.4375, 6.475, 6.55, 6.625, 6.68125, 6.75625, 6.7875, 6.80625, 6.86875, 6.4125, 6.45, 6.48125, 6.5, 6.49375, 6.48125, 6.48125, 6.50625, 6.55, 6.61875, 6.68125, 6.7375, 6.8125, 6.84375, 6.86875, 6.925, 6.48125, 6.51875, 6.5375, 6.5625, 6.59375, 6.59375, 6.58125, 6.60625, 6.66875, 6.71875, 6.7375, 6.7875, 6.85, 6.9, 6.94375, 6.96875, 6.55, 6.5875, 6.60625, 6.6375, 6.675, 6.675, 6.66875, 6.6875, 6.725, 6.76875, 6.80625, 6.85, 6.9125, 6.96875, 7.025, 7.0375, 6.63125, 6.6625, 6.675, 6.70625, 6.75625, 6.75625, 6.75, 6.75625, 6.75, 6.80625, 6.89375, 6.9375, 6.98125, 7.04375, 7.1, 7.125, 6.69375, 6.74375, 6.81875, 6.8625, 6.88125, 6.8875, 6.9, 6.925, 6.95625, 6.9875, 6.99375, 7.0375, 7.10625, 7.1625, 7.2125, 7.24375)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nx8qo"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_48cww"]
+radius = 0.4
+height = 1.8
+
+[node name="World" type="Node3D"]
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4877, 0, -18.1973)
+material_override = SubResource("ShaderMaterial_tkm1h")
+mesh = SubResource("PlaneMesh_3cdnt")
+skeleton = NodePath("../Terrain")
+script = ExtResource("2_3hy4s")
+follow = NodePath("../CharacterController")
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="Levels" type="Node3D" parent="Terrain"]
+script = ExtResource("3_77yey")
+follow = NodePath("../../CharacterController")
+data = ExtResource("4_0oluh")
+count = 11
+material = ExtResource("5_lvyef")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain"]
+
+[node name="TerrainShape3D" type="CollisionShape3D" parent="Terrain/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -18)
+top_level = true
+shape = SubResource("HeightMapShape3D_m7r3o")
+script = ExtResource("6_6g62k")
+follow = NodePath("../../../CharacterController")
+data = ExtResource("4_0oluh")
+discard_negative_z = null
+
+[node name="Terrain3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 243.638, -14.27)
+
+[node name="Top" type="Node3D" parent="Terrain3"]
+script = ExtResource("3_77yey")
+follow = NodePath("../../CharacterController")
+data = ExtResource("7_u7ng2")
+count = 11
+material = ExtResource("8_la4mq")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Terrain3"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.74846e-07, 0, -1.74846e-07, 1, 0, 0, 0)
+
+[node name="TerrainShape3D" type="CollisionShape3D" parent="Terrain3/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -3.73004)
+top_level = true
+shape = SubResource("HeightMapShape3D_1simm")
+script = ExtResource("6_6g62k")
+follow = NodePath("../../../CharacterController")
+data = ExtResource("7_u7ng2")
+height_scale = 0.2
+discard_negative_z = true
+
+[node name="Bottom" type="Node3D" parent="Terrain3"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74232e-08, 0, 8.74232e-08, -1, 0, 0, 0)
+script = ExtResource("3_77yey")
+follow = NodePath("../../CharacterController")
+data = ExtResource("7_u7ng2")
+count = 11
+material = ExtResource("9_8jtb2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.91202, 0.410146, 0, -0.410146, 0.91202, 0, 36.3876, 0)
+shadow_enabled = true
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 500.0
+
+[node name="CharacterController" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.4877, 269.739, -18.1973)
+visible = false
+script = ExtResource("10_dwrd3")
+SPEED = 20.0
+ACCEL = 20.0
+JUMP_VELOCITY = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_nx8qo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_48cww")
+
+[node name="MouseLook" type="Node" parent="CharacterController" node_paths=PackedStringArray("yawNode", "pitchNode", "dollyNode", "camera")]
+script = ExtResource("11_76nw4")
+yawNode = NodePath("../Camera Base/Yaw")
+pitchNode = NodePath("../Camera Base/Yaw/Pitch")
+dollyNode = NodePath("../Camera Base/Yaw/Pitch/Dolly")
+camera = NodePath("../Camera Base/Yaw/Pitch/Dolly/Camera3D")
+initialZoom = 1.0
+maxZoom = 8192.0
+minZoom = 1.0
+zoomStep = 1.5
+
+[node name="FocusHaver" type="Control" parent="CharacterController/MouseLook"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+focus_mode = 1
+
+[node name="Camera Base" type="Node3D" parent="CharacterController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38678, 0)
+
+[node name="Yaw" type="Node3D" parent="CharacterController/Camera Base"]
+
+[node name="Pitch" type="Node3D" parent="CharacterController/Camera Base/Yaw"]
+transform = Transform3D(1, 0, 0, 0, 0.9415, 0.337013, 0, -0.337013, 0.9415, 0, 0, 0)
+
+[node name="Dolly" type="Node3D" parent="CharacterController/Camera Base/Yaw/Pitch"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.40253)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterController/Camera Base/Yaw/Pitch/Dolly"]
+far = 1e+06
+
+[node name="Label" type="RichTextLabel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -274.0
+offset_bottom = 340.0
+grow_horizontal = 0
+text = "2"
+script = ExtResource("12_iccey")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("13_2x6p7")]

@@ -4,41 +4,15 @@ extends Resource
 
 var meshes = {}
 
-@export var terrain_material: ShaderMaterial:
+@export var world_size = 1.0:
   set(value):
-    if terrain_material != value:
-      terrain_material = value
-      update()
+    if world_size != value:
+      world_size = value
 
-@export var shape_material: ShaderMaterial:
+@export var world_height = 1.0:
   set(value):
-    if shape_material != value:
-      shape_material = value
-      update()
-
-@export var grass_material: ShaderMaterial:
-  set(value):
-    if grass_material != value:
-      grass_material = value
-      update()
-
-@export var world_scale = 1.0:
-  set(value):
-    if world_scale != value:
-      if terrain_material:
-        terrain_material.set_shader_parameter("world_scale", value)
-      if shape_material:
-        shape_material.set_shader_parameter("world_scale", value)
-      world_scale = value
-
-@export var height_scale = 1.0:
-  set(value):
-    if height_scale != value:
-      if terrain_material:
-        terrain_material.set_shader_parameter("height_scale", value)
-      if shape_material:
-        shape_material.set_shader_parameter("height_scale", value)
-      height_scale = value
+    if world_height != value:
+      world_height = value
 
 @export var resolution = 10:
   set(value):
@@ -53,6 +27,18 @@ var meshes = {}
       cullable = value
       update()
 
+@export var texture: Texture2D:
+  set(value):
+    if value != texture:
+      texture = value
+      var image:= texture.get_image()
+      texture_size = image.get_size()
+      bytes = image.get_data()
+
+@export var texture_size: Vector2i
+
+var bytes: PackedByteArray
+    
 func update():
   meshes = {}
   changed.emit()

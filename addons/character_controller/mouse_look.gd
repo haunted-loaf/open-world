@@ -45,10 +45,10 @@ func _process(_delta):
     if abs(lean) > 0:
       lean = 0
     elif _curZoom > minZoom:
-      _curZoom /= zoomStep
+      _curZoom -= zoomStep
   if Input.is_action_just_released("look_zoom_out"):
     if _curZoom < maxZoom:
-      _curZoom *= zoomStep
+      _curZoom += zoomStep
     elif lean == 0:
       lean = 1
     else:
@@ -75,6 +75,6 @@ func apply():
   dollyNode.position.x = lean
   pitchNode.rotation.x = _rotation.x
   yawNode.rotation.y = _rotation.y
-  if camera:
-    camera.far = _curZoom * 1e3
-    camera.near = _curZoom / 10.0
+#  if camera:
+#    camera.far = _curZoom * 1e6
+#    camera.near = _curZoom / 4.0
